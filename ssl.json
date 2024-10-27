@@ -1,0 +1,4 @@
+{
+    "fullchain": "/path/to/fullchain.pem",
+    "privkey": "/path/to/privkey.pem"
+}
