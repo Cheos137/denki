@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 from enum import Enum
 from random import randint, choice
+from argon2 import PasswordHasher
 
 # just realized i don't even need websockets.... could've done all this using plain old http, too
 
@@ -28,6 +29,9 @@ class UserState:
         self.switched: bool = False
 
 
+admin_key = '$argon2id$v=19$m=65536,t=11,p=4$TPzUE4+txKA7x0nf8mxLyQ$gzMRz8+CNnAxasW7rsnBQbSRwDX2XR5Ll9ZfWcwg36w'
+argon = PasswordHasher(time_cost=11)
+
 active: bool = False
 admin_handles: list[WSServer] = []
 user_handles: dict[str, WSServer] = {}
@@ -45,10 +49,31 @@ async def send(ws: WSServer, msg: Any) -> None:
 async def handle_admin(ws: WSServer) -> None:
     global active
     admin_handles.append(ws)
+    auth = False
+    auth_tries = 0
 
     async for msg in ws:
         try:
             data = json.loads(msg)
+
+            if not auth:
+                if not 'auth' in data:
+                    await send(ws, { 'error': 'authentication required' })
+                    continue
+
+                key = data['auth']
+                try:
+                    argon.verify(admin_key, key)
+                    auth = True
+                    if not 'action' in data:
+                        continue # support bundling auth and auth + action
+                except:
+                    auth_tries += 1
+                    await send(ws, { 'error': 'authentication failure' })
+                    if auth_tries >= 3:
+                        break
+                    continue
+
             action = data['action']
             match action:
                 case 'start':
