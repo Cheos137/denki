@@ -4,6 +4,15 @@
     border-color: var(--failure);
 }
 
+.chart-wrapper {
+    width: 300px;
+    height: 300px;
+}
+
+.chart-spacer {
+    width: 200px;
+}
+
 #auth-prompt > div > * {
     margin-bottom: 5%;
 }

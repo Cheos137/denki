@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[Admin] Workshop Computational Thinking</title>
     <link rel="stylesheet" href="admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 </head>
 <body>
     <dialog id="auth-prompt">
         <div class="d-flex align-vertical">
             <div>Please log in...</div>
-            <input type="password" name="password" id="password-prompt">
+            <input type="password" name="denki-password" id="password-prompt">
             <button onclick="login()">Login</button>
         </div>
     </dialog>
@@ -21,10 +23,14 @@
             </div>
             <button id="start-button" onclick="start()">Start Game</button>
             <div id="content-row-1" class="d-flex align-horizontal d-none">
-
+                <div class="chart-wrapper"><canvas id="chart-total"></canvas></div>
+                <div class="chart-spacer" id="total"><h2>0 games Total</h2></div>
+                <div class="chart-wrapper"><canvas id="chart-switched-to-stayed"></canvas></div>
             </div>
             <div id="content-row-2" class="d-flex align-horizontal d-none">
-
+                <div class="chart-wrapper"><canvas id="chart-switched"></canvas></div>
+                <div class="chart-spacer"></div>
+                <div class="chart-wrapper"><canvas id="chart-stayed"></canvas></div>
             </div>
         </div>
     </div>
