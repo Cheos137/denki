@@ -45,21 +45,6 @@
     }
 }
 
-.hidden {
-    opacity: 0;
-    transition: opacity .5s ease-in-out;
-}
-
-dialog {
-    outline: none;
-    border: 1px solid var(--foreground);
-    border-radius: 10px;
-
-    &::backdrop {
-        backdrop-filter: blur(1px) brightness(75%);
-    }
-}
-
 #msgbox, #selection-buttons {
     margin-top: 5%;
     min-width: 380px;

@@ -78,6 +78,7 @@ async def handle_admin(ws: WSServer) -> None:
             match action:
                 case 'start':
                     active = True
+                    print('starting game...')
                 case 'query':
                     await send(ws, decorate(game_stats))
                 case _:

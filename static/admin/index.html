@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Admin] Workshop Computational Thinking</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <dialog id="auth-prompt">
+        <div class="d-flex align-vertical">
+            <div>Please log in...</div>
+            <input type="password" name="password" id="password-prompt">
+            <button onclick="login()">Login</button>
+        </div>
+    </dialog>
+    <div class="d-flex w-100 h-100 content-center">
+        <div class="d-flex align-vertical">
+            <div>
+                <h1 id="title" class="mb-3">Monty-Hall Problem - Admin panel</h1>
+            </div>
+            <button id="start-button" onclick="start()">Start Game</button>
+            <div id="content-row-1" class="d-flex align-horizontal d-none">
+
+            </div>
+            <div id="content-row-2" class="d-flex align-horizontal d-none">
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        Uicons by <a href="https://www.flaticon.com/uicons">Flaticon</a>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>

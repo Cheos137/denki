@@ -1,0 +1,9 @@
+@import url('../global.css');
+
+.error {
+    border-color: var(--failure);
+}
+
+#auth-prompt > div > * {
+    margin-bottom: 5%;
+}

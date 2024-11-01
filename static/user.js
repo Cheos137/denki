@@ -49,7 +49,6 @@ const testActive = () => {
 
 socket.addEventListener('message', e => {
     let data = JSON.parse(e.data);
-    console.log(data);
 
     if (data.error) {
         console.log(data.error);
