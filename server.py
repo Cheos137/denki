@@ -35,8 +35,8 @@ argon = PasswordHasher(time_cost=11)
 active: bool = False
 admin_handles: list[WSServer] = []
 user_handles: dict[str, WSServer] = {}
-user_states = dict[str, UserState] = {}
-game_stats = { 'total': 0, 'won': 0, 'lost': 0, 'switched': 0, 'won_switched': 0, 'lost_switched': 0, 'stayed': 0, 'won_stayed': 0, 'lost_stayed': 0 }
+user_states: dict[str, UserState] = {}
+game_stats: dict[str, int] = { 'total': 0, 'won': 0, 'lost': 0, 'switched': 0, 'won_switched': 0, 'lost_switched': 0, 'stayed': 0, 'won_stayed': 0, 'lost_stayed': 0 }
 
 def decorate(data: dict[str, Any]) -> dict[str, Any]:
     data['active'] = active
@@ -131,6 +131,11 @@ async def handle_user(ws: WSServer, id: str) -> None:
                         continue
                     state.switched = True
                     state.game_state = GameState.SWITCHED
+                    await send(ws, decorate({
+                        'selection': state.selection,
+                        'eliminated': state.eliminated,
+                        'switched': state.switched
+                    }))
 
                 case 'reveal':
                     if state.game_state not in [ GameState.SWITCHED, GameState.ELIMINATED ]:
@@ -142,6 +147,7 @@ async def handle_user(ws: WSServer, id: str) -> None:
                     game_stats['won' if won else 'lost'] += 1
                     game_stats['switched' if state.switched else 'stayed'] += 1
                     game_stats[('won' if won else 'lost') + ('_switched' if state.switched else '_stayed')] += 1
+                    print(game_stats)
 
                     state.game_state = GameState.REVEALED
                     await send(ws, decorate({
@@ -192,6 +198,8 @@ if __name__ == '__main__':
         ssl_ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         ssl_ctx.load_cert_chain(ssl_info['fullchain'], ssl_info['privkey'])
         ssl_ctx.set_servername_callback()
+    else:
+        ssl_ctx = None
 
     start_server = websockets.serve(handle_ws, 'localhost', 8137, ssl=ssl_ctx)
     asyncio.get_event_loop().run_until_complete(start_server)
