@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Computational Thinking</title>
+    <link rel="stylesheet" href="user.css">
+</head>
+<body>
+    <dialog id="wait-inactive">
+        Warten auf Gruppenleiter...
+    </dialog>
+    <div class="d-flex w-100 h-100 content-center">
+        <div class="d-flex align-vertical">
+            <div>
+                <h1 id="title" class="mb-3">Monty-Hall Problem</h1>
+            </div>
+            <div>
+                <h2 class="mb-1">Wähle ein Tor</h2>
+            </div>
+            <div class="d-flex align-horizontal">
+                <div id="gate-1">
+                    <img class="gate" src="assets/door-open.svg" alt="Tor 1" width="50px" onclick="selectGate(1)" draggable="false">
+                    <img class="overlay hidden d-none" src="assets/cross.svg" alt="X" width="50px" draggable="false">
+                    <div>Tor 1</div>
+                </div>
+                <div id="gate-2">
+                    <img class="gate" src="assets/door-open.svg" alt="Tor 1" width="50px" onclick="selectGate(2)" draggable="false">
+                    <img class="overlay hidden d-none" src="assets/cross.svg" alt="X" width="50px" draggable="false">
+                    <div>Tor 2</div>
+                </div>
+                <div id="gate-3">
+                    <img class="gate" src="assets/door-open.svg" alt="Tor 1" width="50px" onclick="selectGate(3)" draggable="false">
+                    <img class="overlay hidden d-none" src="assets/cross.svg" alt="X" width="50px" draggable="false">
+                    <div>Tor 3</div>
+                </div>
+            </div>
+            <div id="msgbox">&nbsp;</div>
+            <div id="selection-buttons" class="d-flex align-horizontal hidden">
+                <button id="selection-change" onclick="switchSelection()">Auswahl ändern</button>
+                <button id="selection-keep" onclick="reveal()">Auswahl beibehalten</button>
+            </div>
+            <div>
+                <button id="reset" class="hidden" onclick="reset()">Reset</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        Uicons by <a href="https://www.flaticon.com/uicons">Flaticon</a>
+    </div>
+    <script src="user.js"></script>
+</body>
+</html>

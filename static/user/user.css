@@ -1,0 +1,66 @@
+@import url('../global.css');
+
+.gate {
+    padding: 10px;
+    border: 1px solid var(--foreground);
+    border-radius: 10px;
+
+    user-select: none;
+
+    :not(.no-hover) > & {
+        cursor: pointer;
+        transition: transform .1s .05s ease-in-out, background-color .05s ease-in-out, box-shadow .01s ease-in-out;
+    }
+    
+    :not(.no-hover) > &:hover {
+        background-color: var(--accent);
+        transform: translateY(-3%);
+        box-shadow: 3px 1px 10px black, inset 1px 1px 5px var(--foreground);
+    }
+
+    &.selected {
+        background-color: var(--accent);
+    }
+
+    .winning & {
+        background-color: var(--success) !important;
+    }
+}
+
+.overlay {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    padding: 11px;
+    background: none;
+    user-select: none;
+    transform: translateX(-50%);
+
+    div:has(>&) {
+        position: relative;
+    }
+
+    div:has(>&:not(.hidden)) {
+        opacity: 50%;
+    }
+}
+
+.hidden {
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+}
+
+dialog {
+    outline: none;
+    border: 1px solid var(--foreground);
+    border-radius: 10px;
+
+    &::backdrop {
+        backdrop-filter: blur(1px) brightness(75%);
+    }
+}
+
+#msgbox, #selection-buttons {
+    margin-top: 5%;
+    min-width: 380px;
+}
