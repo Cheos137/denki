@@ -198,7 +198,6 @@ if __name__ == '__main__':
         ssl_info = json.loads(sslconfig.read_text())
         ssl_ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         ssl_ctx.load_cert_chain(ssl_info['fullchain'], ssl_info['privkey'])
-        ssl_ctx.set_servername_callback()
     else:
         ssl_ctx = None
 
